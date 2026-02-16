@@ -1,0 +1,72 @@
+# ======================
+# Model
+# ======================
+model_name_or_path: "cross-encoder/ms-marco-MiniLM-L-6-v2" #"BAAI/bge-reranker-base" # 
+model_type: "bert_encoder"
+num_labels: 1
+query_format: "{}"
+document_format: "{}"
+
+
+# ======================
+# Grouped Dataset 
+# ======================
+train_dataset: "data/kaito/processed/train.jsonl"
+train_dataset_type: "grouped"
+train_label_key: "label"
+template_name: "v2"
+
+# Chosen based on group-size analysis:
+# - >= p10 (8)
+# - keeps most projects
+# - richer signal than 8
+# Giverep 4
+# Kaito 16
+# cookie_fun 8
+train_group_size: 16 #16 #12 # 8
+
+shuffle_rate: 0.0
+max_len: 512
+
+val_dataset: "data/kaito/processed/valid.jsonl"
+val_dataset_type: "grouped"
+val_label_key: "label"
+
+test_dataset: "data/kaito/processed/test.jsonl"
+
+skill_set_version: "rootdata"
+
+loss_type: "pairwise_ranknet" #"pairwise_ranknet_yap_neg" #"pairwise_ranknet_yap_both" #   #"pairwise_soft_ranknet" #  #"pairwise_ranknet_centered" #"listwise_ce" #     # # alternatives: 
+lambda: 0.3
+
+# ======================
+# Training
+# ======================
+output_dir: "./output/kaito"
+
+# ======================
+# Model Saving
+# ======================
+save_on_epoch_end: 1
+num_max_checkpoints: 5
+
+
+# ======================
+# Hyperparameters
+# ======================
+epochs: 4
+lr: 5e-5
+batch_size: 2
+seed: 42
+warmup_proportion: 0.03 # 0.1
+
+stable_proportion: 0.0
+gradient_accumulation_steps: 8 #4
+mixed_precision: fp16
+
+
+# ======================
+# Logging
+# ======================
+log_interval: 10
+log_with: "tensorboard" #"wandb"   # or "tensorboard"
