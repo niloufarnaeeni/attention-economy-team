@@ -37,6 +37,6 @@ GPT-based structured skill extraction pipeline for building and enriching the pr
 
 The framework models the attention economy as a heterogeneous context–actor–skill graph, where projects (contexts), actors, and skills are connected through participation and requirement relations.
 
-![Heterogeneous Context–Actor–Skill Graph](figures/heterogeneous_graph.jpg)
+![Heterogeneous Context–Actor–Skill Graph](figures/heterogeneous_graph.JPG)
 
 
