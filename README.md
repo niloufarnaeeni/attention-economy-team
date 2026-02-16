@@ -20,3 +20,16 @@ These files collectively define the full structured dataset and can be used to b
 
 ### ranker_input/
 - **ranker_corpus.jsonl** – Supervised ranking instances used as input for text-based ranking models.
+
+### text_retrieval/
+
+Text-based actor retrieval using cross-encoder ranking models, including MiniLM (`cross-encoder/ms-marco-MiniLM-L-6-v2`) and BGE Reranker (`BAAI/bge-reranker-base`). This module supports training and evaluation pipelines.
+
+### graph_retrieval/
+
+Graph-based actor retrieval using GNN models such as MetaPath2Vec, GCN, and GraphSAGE for representation learning and recommendation.
+
+### skill_extraction/
+
+GPT-based structured skill extraction pipeline for building and enriching the project skill taxonomy.
+
