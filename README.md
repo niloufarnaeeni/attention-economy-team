@@ -33,7 +33,7 @@ Graph-based actor retrieval using GNN models such as MetaPath2Vec, GCN, and Grap
 
 GPT-based structured skill extraction pipeline for building and enriching the project skill taxonomy.
 
-## Heterogeneous Context–Actor–Skill Graph
+### Heterogeneous Context–Actor–Skill Graph
 
 The framework models the attention economy as a heterogeneous context–actor–skill graph, where projects (contexts), actors, and skills are connected through participation and requirement relations.
 
