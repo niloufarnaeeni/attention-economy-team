@@ -45,58 +45,8 @@ class CrossEncoder(nn.Module):
             raise ValueError("labels is None after unpacking. Check your dataset/collate_fn.")
     
         # ---- ONE loss switch (prevents overwriting) ----
-        if self.loss_type == "pairwise_ranknet_yap_neg":
-            if yaps is None:
-                raise ValueError("pairwise_ranknet_yap_neg requires yaps, but got None.")
     
-            lambda_yap = float(getattr(self, "lambda_", 0.3))
-    
-            loss = ranking_loss.pairwise_ranknet_yap_neg(
-                    logits=logits,
-                    labels=labels,
-                    yaps=yaps,
-                    train_group_size=self.train_group_size,
-                    lambda_yap=lambda_yap,
-                )
-        elif self.loss_type == "pairwise_ranknet_yap_both":
-            if yaps is None:
-                raise ValueError("pairwise_ranknet_yap_both requires yaps, but got None.")
-        
-            lambda_yap = float(getattr(self, "lambda_", 0.3))
-        
-            loss = ranking_loss.pairwise_ranknet_yap_both(
-                logits=logits,
-                labels=labels,
-                yaps=yaps,
-                train_group_size=self.train_group_size,
-                lambda_yap=lambda_yap,
-            )
-
-        elif self.loss_type == "pairwise_ranknet_yap_pos":
-            if yaps is None:
-                raise ValueError("pairwise_ranknet_yap_pos requires yaps")
-        
-            lambda_yap = float(getattr(self, "lambda_", 0.3))
-        
-            loss = ranking_loss.pairwise_ranknet_yap_pos(
-                logits=logits,
-                labels=labels,
-                yaps=yaps,
-                train_group_size=self.train_group_size,
-                lambda_yap=lambda_yap,
-            )
-
-        elif self.loss_type == "pairwise_ranknet_centered":
-            lambda_centered = float(getattr(self, "lambda_", 0.2))
-    
-            loss = ranking_loss.ranknet_with_centered_reg(
-                logits=logits,
-                labels=labels,
-                group_size=self.train_group_size,
-                lambda_centered=lambda_centered,
-            )
-    
-        elif self.loss_type == "pointwise_mse":
+        if self.loss_type == "pointwise_mse":
             loss = ranking_loss.pointwise_mse(logits, labels)
     
         elif self.loss_type == "pointwise_bce":
